@@ -23,7 +23,6 @@ http.createServer((request, response) => {
     response.end();
 
   });
-  return filePath;
 
 }).listen(8080);
 console.log('My test server is running on Port 8080.');
