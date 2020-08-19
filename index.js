@@ -1,40 +1,47 @@
 
 const express = require('express'),
-const morgan = require('morgan'),
-const app = express();
-const bodyParser = require('body-parser');
+ morgan = require('morgan'),
+ app = express();
+ bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 
 
-let topMovies = [
+let movies = [
   {
     title: 'Bambi',
-    description: '',
-    genre:'',
-    director: {
-      name: '',
-      bio: '',
-      birthYear: 9,
-      deathYear: 8
+    description: 'A fawn who will one day become King of the forest is born.  He befriends different animals who help him navigate phases of his life.',
+    genre:{
+      genre: 'Animated',
+      description: 'Cartoon with moving pictures'
     },
-    imageURL: '',
-    featured: '',
+    director: {
+      name: 'David Hand',
+      bio: 'Born in Plainfield, New Jersey, Hand began his animation career working on the Out of the Inkwell cartoons throughout the 1920s. He joined the Disney studio in 1930.  Hand contributed to Midnight in a Toy Shop, The China Plate and Egyptian Melodies.',
+      birthYear: 1900,
+      deathYear: 1996
+    },
+    imageURL: 'bambi.png',
+    featured: 'No',
   },
   {
     title: 'Peter Pan',
-    description: '',
-    genre:'',
-    director: {
-      name: '',
-      bio: '',
-      birthYear: 9,
-      deathYear: 9
+    description: 'A free-spirited and mischevious young boy who never grows up spends his time on the island of Neverland as the leader of the Lost Boys.',
+    genre:{
+      genre: 'Animated',
+      description: 'Cartoon with moving pictures'
     },
-    imageURL: '',
-    featured: '',
-  },
-  {
+    director: {
+      name: 'Clyde Geronimi',
+      bio: 'Born in Italy, he immigrated to the US as a young child.  His earliest experience in animation was through J.R. Bray Studios and joined Disney in 1931.',
+      birthYear: 1901,
+      deathYear: 1989
+    },
+    imageURL: 'peterpan.png',
+    featured: 'Yes',
+  }
+
+/*  {
     title: 'Sleeping Beauty',
     description: '',
     genre:'',
@@ -136,8 +143,7 @@ let topMovies = [
       deathYear: 1900,
     },
     imageURL: '',
-    featured: '',
-  }
+    feature: '', */
 ];
 
 app.use(express.static('public'));
@@ -159,7 +165,7 @@ app.get('/documentation', (_req, res) => {
 });
 
 app.get('/movies', (_req, res) => {
-  res.json(topMovies);
+  res.json(movies);
 });
 
 // Gets all of the data about a single movie, by title
@@ -169,12 +175,12 @@ app.get('/movies/:title', (req, res) => {
 });
 
 //Gets data about a genre of single movie, by title
-app.get('/movies/:title/genres', (_req, res) => {
-  res.send('Successful GET request returning the genre of a single movie');
-  });
+app.get('/movies/:title/genre', (_req, res) => {
+  res.send('Successful GET request returning data about the genre of the movie');
+});
 
 //Gets data about a director (bio, birth year & death year by name)
-app.get('/movies/:name/directors', (_req, res) => {
+app.get('/movies/:title/directors', (_req, res) => {
     res.send('Successful GET request returning data (bio, birth year & death) about the director');
   });
 
@@ -191,6 +197,7 @@ app.put('/users/:id', (_req, res) => {
   //Allow users to add movie to favorites
   app.post('/movies/:title/favorites', (_req, res) => {
     res.send ('Successful POST request allowing users to add a movie to their favorites')
+});
 
   //Allow users to remove movie from favorites
 app.delete('/movies/:title/favorites', (_req, res) => {
@@ -205,4 +212,3 @@ app.delete('/users/:id', (_req, res) => {
 // listen for requests
 app.listen(8080, () =>
   console.log('Your app is listening on port 8080.'));
-});
