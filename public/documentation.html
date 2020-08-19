@@ -1,18 +1,118 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>My Flix</title>
-    </head>
+<head>
+  <title>My Flix</title>
+</head>
 <!--Users of this website will be on all different devices, so must be responsive-->
-  <body>
-    You can use My Flix to:
-    <ul>
-      <li>Search for movies that interest you via genre or director.</li>
-      <li>Learn more about movies you have already watched.</li>
-      <li>Create your own user profile.</li>
-      <li>Save data about your favorite movies.</li>
-    </ul>
-<!--API documentation with endpoints-->
-    
+<body>
+  You can use My Flix to:
+  <ul>
+    <li>Search for movies that interest you via genre or director.</li>
+    <li>Learn more about movies you have already watched.</li>
+    <li>Create your own user profile.</li>
+    <li>Save data about your favorite movies.</li>
+  </ul>
+  <!--API documentation with endpoints-->
+  <div>
+    <h1>Documentation</h1>
+    <table>
+      <caption> API Endpoint Documentation </caption>
+      <br>
+      <thead>
+        <tr class="headers">
+          <th scope="col">REQUEST</th>
+          <th scope="col">URL</th>
+          <th scope="col">HTTP Method</th>
+          <th scope="col">Request Data Format</th>
+          <th scope="col">Response Data Body Format</th>
+        </tr>
+        <tr>
+          <td scope="row">Return data (description, genre, director, Image url, whether it's featured or not) about a single movie by title to the user…</td>
+          <td> /movies/[Title] </td>
+          <td> GET </td>
+          <td> None </td>
+          <td> A JSON object holding data about a single movie, containing an ID, title, and some other properties </td>
+        </tr>
+
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">Return a list of All movies to the user </td>
+          <td> /movies</td>
+          <td>GET </td>
+          <td> None </td>
+          <td> A JSON object holding data about all movies</td>
+        </tr>
+
+        <tr>
+       <td scope="row">Return data about a genres (description) by movie title.</td>
+       <td> movies/[Title]/genre</td>
+       <td>GET </td>
+       <td> None</td>
+       <td> A JSON object holding data about a genre (descriptio) by name or title.</td>
+     </tr>
+
+        <tr>
+        <td scope="row">Return data about a director (bio, birth year, death year) by name </td>
+        <td> /movies/[Title]/director </td>
+        <td> GET </td>
+        <td> None</td>
+        <td>A JSON object holding data about a single director, containing name, birth year, death year, movies.</td>
+      </tr>
+
+      <tr>
+        <td scope="row">Allow new users to register</td>
+        <td>/users</td>
+        <td> POST </td>
+        <td> A JSON object holding data about the new user to register/add:
+          <p>
+            {<br>
+              Username : "Sydney Downs",<br>
+              Password : "$ydneyD0wn$",<br>
+              Email : "garrissm@gmail.com",<br>
+              Birthday : "7-16-1985"<br>
+              }
+          </p>
+        </td>
+        <td> A JSON object holding data about the new user to register plus ID
+</td>
+      </tr>
+
+      <tr>
+              <td scope="row">Allow users to update their user info (username, password, email, date of birth) </td>
+              <td> /users/[ID]</td>
+              <td> PUT </td>
+              <td>A JSON object holding data about the current user to update
+              </td>
+              <td>A message indicating whether the user's account has succesfully changed.
+      </td>
+            </tr>
+
+            <tr>
+        <td scope="row"> Allow users to add a movie to their list of favorites</td>
+        <td> /movies/[Title]/favorites</td>
+        <td> POST </td>
+        <td> A JSON object holding data about the movie to add to the user's list of favorite movies</td>
+            <td> A text message indicating whether the user's favorite movie was succesfully added to their list.</td>
+      </tr>
+
+      <tr>
+        <td scope="row"> Allow users to remove a movie to their list of favorites</td>
+        <td> /movies/[Title]/favorites</td>
+        <td> DELETE </td>
+        <td> None</td>
+        <td> A message indicating whether the movie was succesfully removed from the users' favorite-list.</td>
+      </tr>
+
+      <tr>
+        <td scope="row"> Allow existing users to deregister
+(remove a user by Username or id) </td>
+        <td> /users/id/</td>
+        <td> DELETE </td>
+        <td> None</td>
+        <td> A message indicating whether the user's account was succesfully removed.</td>
+      </tr>
+    </table>
+  </div>
     </body>
-</html>
+    </html>
