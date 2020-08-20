@@ -175,12 +175,12 @@ app.get('/movies/:title', (req, res) => {
 });
 
 //Gets data about a genre of single movie, by title
-app.get('/movies/:title/genre', (_req, res) => {
+app.get('/movies/genre/:genre', (_req, res) => {
   res.send('Successful GET request returning data about the genre of the movie');
 });
 
 //Gets data about a director (bio, birth year & death year by name)
-app.get('/movies/:title/directors', (_req, res) => {
+app.get('/movies/directors/:director', (_req, res) => {
     res.send('Successful GET request returning data (bio, birth year & death) about the director');
   });
 
