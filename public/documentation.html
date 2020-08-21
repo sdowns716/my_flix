@@ -93,7 +93,7 @@
 
             <tr>
         <td scope="row"> Allow users to add a movie to their list of favorites</td>
-        <td> /movies/[Title]/favorites</td>
+        <td> /users/[ID]/movies/[Title]</td>
         <td> POST </td>
         <td> A JSON object holding data about the movie to add to the user's list of favorite movies</td>
             <td> A text message indicating whether the user's favorite movie was succesfully added to their list.</td>
@@ -101,7 +101,7 @@
 
       <tr>
         <td scope="row"> Allow users to remove a movie to their list of favorites</td>
-        <td> /movies/[Title]/favorites</td>
+        <td> /users/[ID]/movies/[Title]</td>
         <td> DELETE </td>
         <td> None</td>
         <td> A message indicating whether the movie was succesfully removed from the users' favorite-list.</td>
