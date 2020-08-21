@@ -195,12 +195,12 @@ app.put('/users/:id', (_req, res) => {
 });
 
   //Allow users to add movie to favorites
-  app.post('/movies/:title/favorites', (_req, res) => {
+  app.post('/users/:id/favorites/:title', (_req, res) => {
     res.send ('Successful POST request allowing users to add a movie to their favorites')
 });
 
   //Allow users to remove movie from favorites
-app.delete('/movies/:title/favorites', (_req, res) => {
+app.delete('/users/:id/favorites/:title', (_req, res) => {
   res.send ('Successful DELETE request allowing users to remove a movie from their favorites')
 });
 
