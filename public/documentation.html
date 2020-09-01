@@ -32,7 +32,24 @@
           <td> /movies/[Title] </td>
           <td> GET </td>
           <td> None </td>
-          <td> A JSON object holding data about a single movie, containing an ID, title, and some other properties </td>
+          <td> A JSON object holding data about a single movie. Example:
+            {
+              "Title": "Aladdin", <br>
+              "Description": "A kindhearted street urchin named Aladdin finds a magic lamp that has the power to make his deepest wishes come true.",<br>
+              "ImagePath": "aladdin.png",<br>
+              "Featured": false<br>
+                "Genre": {<br>
+                    "Name": "Animated",<br>
+                    "Description": "Animation is a method of manipulating pictures to appear as moving images."<br>
+                },<br>
+                "Director": {<br>
+                    "Name": "Ron Clements",<br>
+                    "Bio": "Ron Clements is an American born writer and director best known for Hercules (1997), Aladdin (1992) and The Princess and the Frog (2009).",<br>
+                    "Birth": "1953"<br>
+                },<br>
+                "_id": "5f43d5fa23a7044c8c8453e8",<br>
+
+   </td>
         </tr>
 
       </thead>
@@ -42,25 +59,48 @@
           <td> /movies</td>
           <td>GET </td>
           <td> None </td>
-          <td> A JSON object holding data about all movies</td>
+          <td> A JSON object holding data about all movies.</td>
         </tr>
 
         <tr>
        <td scope="row">Return data about a genres (description) by movie title.</td>
-       <td> movies/genres/[genre]
+       <td> movies/genres/[Title]
        </td>
        <td>GET </td>
        <td> None</td>
-       <td> A JSON object holding data about a genre (descriptio) by name or title.</td>
+       <td> A JSON object holding data about a genre (descriptio) by name or title.Example: <br>
+         {<br>
+      "Genre": {<br>
+          "Name": "Animated",<br>
+          "Description": "Animation is a method in which pictures are manipulated to appear as moving images."<br>
+      },<br>
+      "Director": {<br>
+          "Name": "David Hand",<br>
+          "Bio": "Born in Plainfield, New Jersey, Hand began his animation career working on the Out of the Inkwell cartoons throughout the 1920s.  He joined the Disney studio in 1930.  Hand contributed to Midnight in a Toy Shop, The China Plate and Egyptian Melodies.",<br>
+          "Birth": "1900",<br>
+          "Death": "1996"<br>
+      },<br>
+      "_id": "5f42b0440c4e672d41532350",<br>
+      "Title": "Bambi",<br>
+      "Description": "A fawn who will one day become King of the forest is born.  He befriends different animals who help him navigate phases of his life.",<br>
+      "ImagePath": "bambi.png",<br>
+      "Featured": false<br>
+  }</td>
      </tr>
 
         <tr>
         <td scope="row">Return data about a director (bio, birth year, death year) by name </td>
-        <td> /movies/directors/[director]
+        <td> /movies/directors/[Name]
         </td>
         <td> GET </td>
         <td> None</td>
-        <td>A JSON object holding data about a single director, containing name, birth year, death year, movies.</td>
+        <td>A JSON object holding data about a single director, containing name, birth year, death year, movies. Example:<br>
+          {<br>
+              "Name": "Ron Clements",<br>
+              "Bio": "Ron Clements is an American born writer and director best known for Hercules (1997), Aladdin (1992) and The Princess and the Frog (2009).",<br>
+              "Birth": "1953"<br>
+          }<br>
+        </td>
       </tr>
 
       <tr>
@@ -87,24 +127,73 @@
               <td> PUT </td>
               <td>A JSON object holding data about the current user to update
               </td>
-              <td>A message indicating whether the user's account has succesfully changed.
+              <td>A message indicating whether the user's account has succesfully changed. Example: <br>
+                {<br>
+    "FavoriteMovies": [],<br>
+    "_id": "5f43ef392471f4509cc6ad7f",<br>
+    "Name": "Leo Downs",<br>
+    "Username": "ldowns18",<br>
+    "Password": "leo123",<br>
+    "Email": "leo18@gmail.com",<br>
+    "Birthday": "2018-12-28T05:00:00.000Z",<br>
+    "Movies": [<br>
+        "5f43d54023a7044c8c8453e7",<br>
+        "5f42b0440c4e672d41532350"<br>
+    ]<br>
+}<br>
       </td>
             </tr>
 
             <tr>
         <td scope="row"> Allow users to add a movie to their list of favorites</td>
-        <td> /users/[ID]/movies/[Title]</td>
+        <td> /users/[Username]/movies/[ID]</td>
         <td> POST </td>
-        <td> A JSON object holding data about the movie to add to the user's list of favorite movies</td>
-            <td> A text message indicating whether the user's favorite movie was succesfully added to their list.</td>
+        <td> A JSON object holding data about the movie to add to the user's list of favorite movies.  Example: <br>
+          {<br>
+      "Username": "ldowns18",<br>
+      "Password": "leo123",<br>
+      "Email": "leo18@gmail.com",<br>
+      "Birthday": "12/28/2018",<br>
+      "Favorites": [""],<br>
+      "_id": "5f43cbc123a7044c8c8453e1"<br>
+  }</td><br>
+            <td> A text message indicating whether the user's favorite movie was succesfully added to their list. Example <br>
+              {<br>
+      "FavoriteMovies": [<br>
+          "5f43cbc123a7044c8c8453e1"<br>
+      ],<br>
+      "_id": "5f43ef392471f4509cc6ad7f",<br>
+      "Name": "Leo Downs",<br>
+      "Username": "ldowns18",<br>
+      "Password": "leo123",<br>
+      "Email": "leo18@gmail.com",<br>
+      "Birthday": "2018-12-28T05:00:00.000Z",<br>
+      "Movies": [<br>
+          "5f43d54023a7044c8c8453e7",<br>
+          "5f42b0440c4e672d41532350"<br>
+      ]<br>
+  }</td>
       </tr>
 
       <tr>
-        <td scope="row"> Allow users to remove a movie to their list of favorites</td>
-        <td> /users/[ID]/movies/[Title]</td>
+        <td scope="row"> Allow users to remove a movie from their list of favorites</td>
+        <td> /users/[Username]/movies/[ID]</td>
         <td> DELETE </td>
         <td> None</td>
-        <td> A message indicating whether the movie was succesfully removed from the users' favorite-list.</td>
+        <td> A message indicating whether the movie was succesfully removed from the users' favorite-list. Example:<br>
+          {<br>
+      "FavoriteMovies": [],<br>
+      "_id": "5f43ef392471f4509cc6ad7f",<br>
+      "Name": "Leo Downs",<br>
+      "Username": "ldowns18",<br>
+      "Password": "leo123",<br>
+      "Email": "leo18@gmail.com",<br>
+      "Birthday": "2018-12-28T05:00:00.000Z",<br>
+      "Movies": [<br>
+          "5f43d54023a7044c8c8453e7",<br>
+          "5f42b0440c4e672d41532350"<br>
+      ]<br>
+  }</td>
       </tr>
 
       <tr>
