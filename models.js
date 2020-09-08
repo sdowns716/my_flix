@@ -28,6 +28,7 @@ let userSchema = mongoose.Schema({
 let Movie = mongoose.model('Movie', movieSchema);
 let User = mongoose.model('User', userSchema);
 
+
 userSchema.statics.hashPassword = (password) => {
   return bcrypt.hashSync(password, 10);
 };

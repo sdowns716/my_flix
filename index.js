@@ -15,17 +15,25 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(morgan('common'));
 
-//authorization middleware
-let auth = require('./auth')(app);
-
 //passport module
 const passport = require('passport');
 require('./passport');
+const auth = require('./auth')(app);
+
 
 const cors = require('cors');
-app.use(cors());
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
-/* rest of code goes here*/
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 const { check, validationResult } = require('express-validator');
 
@@ -107,31 +115,12 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {session: false}
 });
 
   // Adds data for a new user registration
-  app.post('/users',
-  // Validation logic here for request
-  //you can either use a chain of methods like .not().isEmpty()
-  //which means "opposite of isEmpty" in plain english "is not empty"
-  //or use .isLength({min: 5}) which means
-  //minimum value of 5 characters are only allowed
-  [
-    check('Username', 'Username is required').isLength({min: 5}),
-    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail()
-  ], (req, res) => {
-
-  // check the validation object for errors
-    let errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
-
+  app.post('/users', (req, res) => {
     let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
       .then((user) => {
         if (user) {
-          //If the user is found, send a response that it already exists
+        //If the user is found, send a response that it already exists
           return res.status(400).send(req.body.Username + ' already exists');
         } else {
           Users
@@ -153,6 +142,7 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {session: false}
         res.status(500).send('Error: ' + error);
       });
   });
+
   // Get all users
 app.get('/users', passport.authenticate('jwt', {session: false}), (_req, res) => {
   Users.find()
@@ -198,7 +188,8 @@ if (!errors.isEmpty()) {
   return res.status(422).json({ errors: errors.array() });
 }
   let hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+  Users.findOneAndUpdate({ Username: req.params.Username },
+    { $set:
     {
       Username: req.body.Username,
       Password: hashedPassword,
