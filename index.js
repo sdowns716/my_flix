@@ -20,6 +20,7 @@ app.use(morgan('common'));
 const passport = require('passport');
 require('./passport');
 
+const auth = require('./auth')(app);
 
 const cors = require('cors');
 app.use(cors());
