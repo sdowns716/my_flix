@@ -20,7 +20,7 @@
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
     "@types/cors": "^2.8.7",
-    "@types/express": "^4.17.7",
+    "@types/express": "^4.17.8",
     "@types/mongoose": "^5.7.36",
     "@types/morgan": "^1.9.1",
     "@types/passport": "^1.0.4",
@@ -33,7 +33,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
     "missing": "0.0.1",
-    "mongoose": "^5.10.2",
+    "mongoose": "^5.10.4",
     "uuid": "^8.3.0"
   },
   "devDependencies": {},
