@@ -276,10 +276,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
 });
 
 // listen for requests
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 app.listen(port, '0.0.0.0',() => {
- //console.log('Listening on Port ' + port);
-//})
-app=express();
-//set the port
-app.set('port', PORT)})
+console.log('Listening on Port ' + port);
+})
