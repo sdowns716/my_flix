@@ -32,7 +32,6 @@ let allowedOrigins = [
   'http://sydney-flix-app.herokuapp.com/',
   'http://localhost:8080',
   'http://192.168.1.51:8080',
-  'https://testsite.com',
 ];
 
 const cors = require('cors');
