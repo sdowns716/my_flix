@@ -1,9 +1,3 @@
-const mongoose = require('mongoose');
-const Models = require('./models.js');
-
-const Movies = Models.Movie;
-const Users = Models.User;
-
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
@@ -11,26 +5,33 @@ mongoose.connect(process.env.CONNECTION_URI, {
 });
 
 const express = require('express'),
- morgan = require('morgan'),
- app = express();
- bodyParser = require('body-parser');
- uuid = require("uuid");
-app.use(bodyParser.json());
-app.use(express.static('public'));
-app.use(morgan('common'));
+  bodyParser = require('body-parser');
+  uuid = require("uuid");
 
-//passport module
 const passport = require('passport');
-require('./passport');
+const  morgan = require('morgan');
+const  app = express();
 
-const auth = require('./auth')(app);
+
+app.use(bodyParser.json());
+app.use(morgan('common'));
+app.use(express.static('public'));
+
+const { check, validationResult } = require('express-validator');
+
+let auth = require('./auth')(app);
+  require('./passport');
+
+const mongoose = require('mongoose');
+
+const Models = require('./models.js');
+const Movies = Models.Movie;
+const Users = Models.User;
 
 let allowedOrigins = [
   'http://sydney-flix-app.herokuapp.com/',
-  'http://localhost:1234',
-  'http://localhost:27017',
   'http://localhost:8080',
-  'http://localhost:5000',
+  'http://192.168.1.51:8080',
   'https://testsite.com',
 ];
 
@@ -51,8 +52,6 @@ app.use(
     },
   })
 );
-
-const { check, validationResult } = require('express-validator');
 
 //Error handling middleware
 app.use((err, _req, res, _next) => {
