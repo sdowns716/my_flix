@@ -30,7 +30,6 @@ let allowedOrigins = [
   'http://localhost:1234',
   'http://localhost:27017',
   'http://localhost:8080',
-  'http://localhost:42218',
   'http://localhost:5000',
   'https://testsite.com',
 ];
@@ -277,7 +276,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
 });
 
 // listen for requests
-const port = process.env.PORT || 42218;
+const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
 console.log('Listening on Port ' + port);
 })
