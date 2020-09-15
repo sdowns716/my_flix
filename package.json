@@ -1,9 +1,6 @@
 {
   "name": "my_flix",
-  "version": "1.0.0",
-  "engines": {
-   "node": "12.18.3"
-   }
+  "version": "1.0.0"
 },
   "main": "index.js",
   "scripts": {
