@@ -20,7 +20,6 @@ app.use(express.static('public'));
 const { check, validationResult } = require('express-validator');
 
 let auth = require('./auth')(app);
-app.use(auth)(app);
   require('./passport');
 
 const mongoose = require('mongoose');
