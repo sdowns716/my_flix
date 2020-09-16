@@ -1,35 +1,32 @@
+const express = require('express');
+const  morgan = require('morgan')
+const  bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const Models = require('./models.js')
+const passport = require('passport')
+const  app = express()
+path = require('path');
+  uuid = require("uuid");
+
+const cors = require('cors');
+const { check, validationResult } = require('express-validator');
+
+require('./passport');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-const express = require('express');
-  bodyParser = require('body-parser')
-  uuid = require("uuid");
-
-const passport = require('passport')
-const  morgan = require('morgan')
-const  app = express()
-const path = require('path');
-
-
 app.use(bodyParser.json());
 app.use(morgan('common'));
-app.use(express.static('public'));
-
-const cors = require('cors');
 app.use(cors());
-const { check, validationResult } = require('express-validator');
-
-let auth = require('./auth')(app);
-  require('./passport');
-
-const mongoose = require('mongoose')
-
-const Models = require('./models.js')
-const Movies = Models.Movie;
-const Users = Models.User;
+app.use(express.static('public'));
+auth = require('./auth')(app);
 
 let allowedOrigins = [
   'https://sydney-flix-app.herokuapp.com',
