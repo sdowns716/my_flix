@@ -4,37 +4,39 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true
 });
 
-const express = require('express'),
-  bodyParser = require('body-parser');
+const express = require('express');
+  bodyParser = require('body-parser')
   uuid = require("uuid");
 
-const passport = require('passport');
-const  morgan = require('morgan');
-const  app = express();
+const passport = require('passport')
+const  morgan = require('morgan')
+const  app = express()
+const path = require('path');
 
 
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(express.static('public'));
 
+const cors = require('cors');
+app.use(cors());
 const { check, validationResult } = require('express-validator');
 
 let auth = require('./auth')(app);
   require('./passport');
 
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const Models = require('./models.js');
+const Models = require('./models.js')
 const Movies = Models.Movie;
 const Users = Models.User;
 
 let allowedOrigins = [
-  'http://sydney-flix-app.herokuapp.com/',
+  'https://sydney-flix-app.herokuapp.com',
   'http://localhost:8080',
-  'http://192.168.1.51:8080',
+  'http://localhost:1234',
 ];
 
-const cors = require('cors');
 //app.use(cors());
 app.use(
   cors({
@@ -48,9 +50,8 @@ app.use(
         return callback(new Error(message), false);
       }
       return callback(null, true);
-    },
-  })
-);
+    }
+  }));
 
 //Error handling middleware
 app.use((err, _req, res, _next) => {
@@ -59,7 +60,7 @@ app.use((err, _req, res, _next) => {
 });
 // GET requests
 app.get('/', (_req, res) => {
-  res.send('Welcome to my Disney Movie App!');
+  res.send('Welcome to my Movie App!')
 });
 app.get('/documentation', (_req, res) => {
   res.sendFile('documentation.html', { root: __dirname });
@@ -277,4 +278,4 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
 console.log('Listening on Port ' + port);
-})
+});
