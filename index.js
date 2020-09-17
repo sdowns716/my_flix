@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const Models = require('./models.js')
 const passport = require('passport')
 const  app = express()
-path = require('path');
   uuid = require("uuid");
 
 const cors = require('cors');
@@ -71,7 +70,7 @@ app.get('/movies', passport.authenticate('jwt', {session: false}), (_req, res) =
     })
     .catch(function(err) {
       console.error(err);
-      res.status(500).send("Error: " + err);
+      res.status(500).send('Error: ' + err);
     });
   });
 
@@ -79,11 +78,11 @@ app.get('/movies', passport.authenticate('jwt', {session: false}), (_req, res) =
 app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({ Title : req.params.Title })
   .then((movie) => {
-    res.json(movie)
+    res.status(201).json(movie);
   })
   .catch((err) => {
     console.error(err);
-    res.status(500).send("Error: " + err);
+    res.status(500).send('Error: ' + err);
   });
 });
 
@@ -91,11 +90,11 @@ app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req, 
 app.get('/movies/genres/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({'Genre.Name': req.params.Name})
   .then(function(movie){
-    res.json(movie)
+    res.status(201).json(movie)
     })
   .catch(function(err) {
     console.error(err);
-    res.status(500).send("Error:" + err);
+    res.status(500).send('Error:' + err);
   });
 });
 
@@ -104,14 +103,14 @@ app.get('/movies/genres/:Title', passport.authenticate('jwt', {session: false}),
   Movies.findOne({'Genre.Title': req.params.Title})
   .then(function(movie){
     if(movie){
-      res.status(201).send("Movie with the title : " + movie.Title + " is  a " + movie.Genre.Name + " ." );
+      res.status(201).send('Movie with the title : ' + movie.Title + ' is  a ' + movie.Genre.Name + ' .' );
     }else{
-      res.status(404).send("Movie with the title : " + req.params.Title + " was not found.");
+      res.status(404).send('Movie with the title : ' + req.params.Title + ' was not found.');
         }
     })
   .catch(function(err) {
     console.error(err);
-    res.status(500).send("Error:" + err);
+    res.status(500).send('Error:' + err);
   });
 });
 
@@ -119,7 +118,7 @@ app.get('/movies/genres/:Title', passport.authenticate('jwt', {session: false}),
 app.get('/movies/directors/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({"Director.Name" : req.params.Name})
   .then(function(movies){
-    res.json(movies.Director)
+    res.status(201).json(movies.Director)
   })
   .catch(function(err) {
     console.error(err);
@@ -191,7 +190,7 @@ app.get('/users', passport.authenticate('jwt', {session: false}), (_req, res) =>
 app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOne({ Username: req.params.Username })
     .then((user) => {
-      res.json(user);
+      res.status(201).json(user);
     })
     .catch((err) => {
       console.error(err);
