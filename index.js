@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 const passport = require('passport');
 const app = express();
-const uuid = require("uuid");
+ uuid = require("uuid");
 
 const cors = require('cors');
 const { check, validationResult } = require('express-validator');
@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(cors());
 app.use(express.static('public'));
-const auth = require('./auth')(app);
+ auth = require('./auth')(app);
 
 let allowedOrigins = [
   'https://sydney-flix-app.herokuapp.com',
