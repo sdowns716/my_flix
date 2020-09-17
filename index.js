@@ -1,11 +1,11 @@
 const express = require('express');
-const  morgan = require('morgan');
-const  bodyParser = require('body-parser');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const passport = require('passport');
 const app = express();
- uuid = require("uuid");
+const uuid = require("uuid");
 
 const cors = require('cors');
 const { check, validationResult } = require('express-validator');
@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(cors());
 app.use(express.static('public'));
- auth = require('./auth')(app);
+const auth = require('./auth')(app);
 
 let allowedOrigins = [
   'https://sydney-flix-app.herokuapp.com',
