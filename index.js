@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(cors());
 app.use(express.static('public'));
-auth = require('./auth')(app);
+const auth = require('./auth')(app);
 
 let allowedOrigins = [
   'https://sydney-flix-app.herokuapp.com',
