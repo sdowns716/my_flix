@@ -30204,8 +30204,6 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // If the state isn't initialized, this will throw on runtime
-      // before the data is initially loaded
       var movies = this.state.movies; // Before the movies have been loaded
 
       if (!movies) return _react.default.createElement("div", {
