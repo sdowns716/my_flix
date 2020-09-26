@@ -44,13 +44,21 @@ render() {
 
   return (
    <div className="main-view">
-     {selectedMovie
-     ? <MovieView movie={selectedMovie}/>
-      : movies.map(movie => (
-    <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
-     ))
-     }
-     </div>
+     {selectedMovie ? (
+        <MovieView
+          movie={selectedMovie}
+            onClick={() => this.onMovieClick()}
+        />
+  ) : (
+      movies.map(movie => (
+        <MovieCard
+            key={movie._id}
+            movie={movie}
+            onClick={movie => this.onMovieClick(movie)}
+        />
+    ))
+    )}
+   </div>
     );
   }
 }
