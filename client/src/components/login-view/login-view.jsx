@@ -48,7 +48,7 @@ export function LoginView(props) {
           </Row>
           <Row>
             <Col className='Button'>
-              <Button type='button' variant='dark' onClick={handleSubmit}>
+              <Button type='button' onClick={handleSubmit}>
                 Submit
               </Button>
             </Col>

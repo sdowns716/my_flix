@@ -32722,7 +32722,6 @@ function LoginView(props) {
     className: "Button"
   }, _react.default.createElement(_Button.default, {
     type: "button",
-    variant: "dark",
     onClick: handleSubmit
   }, "Submit"))))));
 }
@@ -46192,7 +46191,6 @@ function RegistrationView(props) {
     className: "Button"
   }, _react.default.createElement(_Col.default, null, _react.default.createElement(_reactBootstrap.Button, {
     type: "button",
-    variant: "dark",
     onClick: handleSubmit
   }, "Submit"))))));
 }

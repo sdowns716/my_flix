@@ -69,7 +69,7 @@ export function RegistrationView(props) {
           </Row>
           <Row className='Button'>
             <Col>
-              <Button type='button' variant='dark' onClick={handleSubmit}>
+              <Button type='button' onClick={handleSubmit}>
                 Submit
               </Button>
             </Col>
