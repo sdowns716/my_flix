@@ -4,19 +4,28 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import axios from 'axios';
 import './login-view.scss';
 
 export function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
 
-   //Allows to login with any credentials
-   const handleSubmit = (e) => {
+//Allows to login with any credentials
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password);
-    // Send a request to the server for authentication then call props.onLoggedIn(username)
-    props.onLoggedIn(username);
-  };
+    axios.post('https://sydney-flix-app.herokuapp.com/login', {
+    Username: username,
+    Password: password
+  })
+  .then(response => {
+    const data = response.data;
+    props.onLoggedIn(data);
+  })
+  .catch(e => {
+    console.log('no such user')
+  });
+};
 
   return (
     <Container>
