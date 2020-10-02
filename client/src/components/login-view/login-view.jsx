@@ -11,7 +11,6 @@ export function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
 
-//Allows to login with any credentials
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('https://sydney-flix-app.herokuapp.com/login', {

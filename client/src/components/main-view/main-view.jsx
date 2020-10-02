@@ -20,9 +20,10 @@ export class MainView extends React.Component {
     };
   }
 
-componentDidMount() {
-  axios.get('https://sydney-flix-app.herokuapp.com/movies')
-    .then(response => {
+  componentDidMount() {
+    axios
+    .get('https://sydney-flix-app.herokuapp.com/movies')
+    .then((response) => {
       // Assign the result to the state
       this.setState({
         movies: response.data
@@ -32,7 +33,7 @@ componentDidMount() {
       console.log(error);
     });
 }
-
+  
 onMovieClick(movie) {
   this.setState({
     selectedMovie: movie
@@ -51,11 +52,8 @@ onLoggedIn(authData) {
 }
 
 render() {
-  // If the state isn't initialized, this will throw on runtime
-  // before the data is initially loaded
   const { movies, selectedMovie, user } = this.state;
 
-  //if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
   if (!user)
       return [
         <RegistrationView onLoggedIn={(user) => this.onLoggedIn(user)} />,
@@ -76,11 +74,11 @@ render() {
           ) : (
             movies.map((movie) => (
               <Col>
-              <MovieCard
+                <MovieCard
                 key={movie._id}
                 movie={movie}
                 onClick={(movie) => this.onMovieClick(movie)}
-              />
+                />
               </Col>
             ))
           )}
@@ -90,3 +88,4 @@ render() {
   );
 }
 }
+
