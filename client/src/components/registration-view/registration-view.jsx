@@ -1,81 +1,94 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Form, Container, Button } from 'react-bootstrap';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-import './registration-view.scss';
+import React, { useState } from "react";
+//Routing
+import axios from "axios";
+import { Link } from "react-router-dom";
+//Styling
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export function RegistrationView(props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [dob, setDob] = useState('');
+	const [username, createUsername] = useState("");
+	const [password, createPassword] = useState("");
+	const [email, createEmail] = useState("");
+	const [birthday, createDob] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(username, password, email, dob);
-    // Send a request to the server for authentication then call props.onLoggedIn(username)
-    props.onLoggedIn(username);
-  };
-  return (
-    <Container className='container'>
-      <Form>
-        <Form.Group className='registration'>
-          <h4>Please Register</h4>
-          <Row>
-            <Col>
-              <Form.Label className='Label'>Username:</Form.Label>
-              <Form.Control
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className='Control'
-                type='text'
-                placeholder='Enter Username'
-              />
-            </Col>
-            <Col>
-              <Form.Label className='Label'>Email:</Form.Label>
-              <Form.Control
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className='email'
-                type='email'
-                placeholder='Enter Email'
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Form.Label className='Label'>Birthday:</Form.Label>
-              <Form.Control
-                value={dob}
-                onChange={(e) => setDob(e.target.value)}
-                className='birthday'
-                type='date'
-                placeholder='Enter Birthday'
-              />
-            </Col>
-            <Col>
-              <Form.Label className='Label'>Password:</Form.Label>
-              <Form.Control
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className='Control2'
-                type='password'
-                placeholder='Enter Password'
-              />
-            </Col>
-          </Row>
-          <Row className='Button'>
-            <Col>
-              <Button type='button' onClick={handleSubmit}>
-                Submit
-              </Button>
-            </Col>
-          </Row>
-        </Form.Group>
-      </Form>
-    </Container>
-  );
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		axios
+			.post("https://my-flix-project.herokuapp.com/users", {
+				UserName: username,
+				Password: password,
+				Email: email,
+				Birthday: birthday,
+			})
+			.then((response) => {
+				const data = response.data;
+				alert("Your account has been created! Please login");
+				console.log(data);
+				window.open("/client", "_self");
+			})
+			.catch((e) => {
+				console.log("error registering the user");
+			});
+	};
+
+	return (
+		<Container style={{ width: "42rem" }}>
+			<Form>
+				<Form.Group controlId="formBasicUsername">
+					<Form.Label>Username</Form.Label>
+					<Form.Control
+						type="text"
+						placeholder="Username"
+						value={username}
+						onChange={(e) => createUsername(e.target.value)}
+					/>
+				</Form.Group>
+				<Form.Group controlId="formBasicPassword">
+					<Form.Label>Password</Form.Label>
+					<Form.Control
+						type="password"
+						placeholder="Password"
+						value={password}
+						onChange={(e) => createPassword(e.target.value)}
+					/>
+				</Form.Group>
+				<Form.Group controlId="formBasicEmail">
+					<Form.Label>Email address</Form.Label>
+					<Form.Control
+						type="email"
+						placeholder="Enter email"
+						value={email}
+						onChange={(e) => createEmail(e.target.value)}
+					/>
+					<Form.Text className="text-muted">
+						We will never share your information with anyone
+					</Form.Text>
+				</Form.Group>
+				<Form.Group controlId="formBasicDob">
+					<Form.Label>Birthday</Form.Label>
+					<Form.Control
+						type="date"
+						placeholder="12/31/1999"
+						value={birthday}
+						onChange={(e) => createDob(e.target.value)}
+					/>
+				</Form.Group>
+				<Form.Group controlId="formBasicCheckbox">
+					<Form.Check
+						type="checkbox"
+						label="Confirm you really want to register for myFlix"
+					/>
+				</Form.Group>
+				<Button type="submit" onClick={handleSubmit}>
+					Register
+				</Button>{" "}
+				<Link to={"/login"}>
+					<Button>Go to Login</Button>
+				</Link>
+			</Form>
+		</Container>
+	);
 }

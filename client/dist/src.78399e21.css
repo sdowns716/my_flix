@@ -2,20 +2,12 @@
   padding-top: 10px;
 }
 
-h4 {
-  margin-top: 50px;
-}
-.btn {
-  text-align: center;
-}
-.col,
-.movie-poster {
-  margin: 20px auto;
+.Control {
+  margin-top: 20px;
 }
 
-.label {
-  font-size: large;
-  font-weight: bold;
+h5 {
+  margin-top: 20px;
 }
 .my-flix {
   color: steelblue;
