@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 
 export class ProfileView extends React.Component {
   constructor(props) {
-    super(props);
+    //super(props);
 
     this.state = {
       username: null,
@@ -48,9 +48,7 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies } = this.props;
-    // const favoriteMovieList = movies.filter((movie) =>
-    //   this.state.favoriteMovies.includes(movie._id)
-    // );
+  
     return (
       <div>
         <Container>
@@ -63,29 +61,10 @@ export class ProfileView extends React.Component {
               <Card.Text>Email: {this.state.Email}</Card.Text>
               <Card.Text>Birthday {this.state.Birthday}</Card.Text>
               Favorite Movies:
-              {/* {favoriteMovieList.map((movie) => (
-                <div key={movie._id} className="fav-movies-button">
-                  <Link to={`/movies/${movie._id}`}>
-                    <Button variant="link">{movie.Title}</Button>
-                  </Link>
-                  <Button
-                    size="sm"
-                    onClick={(e) => this.deleteFavoriteMovie(movie._id)}
-                  >
-                    Remove Favorite
-                  </Button>
-                </div>
-              ))} */}
-              <br />
-              <br />
               <Link to={'/user/update'}>
                 <Button variant="primary">Update Profile</Button>
-                <br />
-                <br />
               </Link>
               <Button onClick={() => this.deleteUser()}>Delete User</Button>
-              <br />
-              <br />
               <Link to={`/`}>Back</Link>
             </Card.Body>
           </Card>

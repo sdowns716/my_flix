@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-//Routing
+
 import axios from "axios";
 import { Link } from "react-router-dom";
-//Styling
+
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -17,7 +17,7 @@ export function RegistrationView(props) {
 		e.preventDefault();
 
 		axios
-			.post("https://my-flix-project.herokuapp.com/users", {
+			.post("https://sydney-flix-app.herokuapp.com/users", {
 				UserName: username,
 				Password: password,
 				Email: email,
