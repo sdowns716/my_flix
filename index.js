@@ -14,8 +14,13 @@ require('./passport');
 
 const Movies = Models.Movie;
 const Users = Models.User;
+const Directors = Models.Director;
+const Genres = Models.Genre;
 
-//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+/*mongoose.connect('mongodb://localhost:27017/myFlixDB', { 
+  useNewUrlParser: true, 
+  useUnifiedTopology: true });*/
+
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -31,9 +36,10 @@ let allowedOrigins = [
   'https://sydney-flix-app.herokuapp.com',
   'http://localhost:8080',
   'http://localhost:1234',
+  '*'
 ];
 
-//app.use(cors());
+app.use(cors());
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -63,7 +69,9 @@ app.get('/documentation', (_req, res) => {
 });
 
 // Get all movies
-app.get('/movies', passport.authenticate('jwt', { session: false }), (_req, res) => {
+app.get('/movies', 
+passport.authenticate('jwt', { session: false }), 
+(_req, res) => {
   Movies.find()
     .then(function(movies) {
       res.status(201).json(movies)
@@ -128,11 +136,7 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {session: false}
 
   // Adds data for a new user registration
   app.post('/users',
-  // Validation logic here for request
-  //you can either use a chain of methods like .not().isEmpty()
-  //which means "opposite of isEmpty" in plain english "is not empty"
-  //or use .isLength({min: 5}) which means
-  //minimum value of 5 characters are only allowed
+
   [
     check('Username', 'Username is required').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
@@ -175,7 +179,7 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', {session: false}
   });
 
   // Get all users
-app.get('/users', passport.authenticate('jwt', {session: false}), (_req, res) => {
+app.get('/users', (_req, res) => {
   Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -200,6 +204,7 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
 
 //Allows users to update their info(username, password, email, DOB)
 app.put('/users/:Username',
+passport.authenticate('jwt', { session: false }),
 (req, res) => {
 let hashedPassword = Users.hashPassword(req.body.Password);
 Users.findOneAndUpdate({ Username: req.params.Username },
