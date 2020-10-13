@@ -51,7 +51,8 @@ export class MainView extends React.Component {
 		this.setState({
 			user,
 		});
-	}
+  this.getMovies(this.state.user.token)
+  }
   render() {
     const { movies, user } = this.state;
 
@@ -69,7 +70,9 @@ export class MainView extends React.Component {
                 return (
                   <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                 );
-              return <MoviesList movies={movies} />;
+              return movies.map((movie) => {
+                return <MovieCard movie={movie} />
+              })
             }}
           />
 

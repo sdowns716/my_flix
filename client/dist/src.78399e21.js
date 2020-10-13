@@ -36590,6 +36590,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       this.setState({
         user: user
       });
+      this.getMovies(this.state.user.token);
     }
   }, {
     key: "render",
@@ -36617,8 +36618,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
               return _this3.onLoggedIn(user);
             }
           });
-          return _react.default.createElement(MoviesList, {
-            movies: movies
+          return movies.map(function (movie) {
+            return _react.default.createElement(_movieCard.MovieCard, {
+              movie: movie
+            });
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
