@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -30,6 +31,10 @@ app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(cors());
 app.use(express.static('public'));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 const auth = require('./auth')(app);
 
 let allowedOrigins = [

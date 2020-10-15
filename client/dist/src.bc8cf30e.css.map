@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/login-view/login-view.scss","index.scss"],"names":[],"mappings":"AAAA,QACE,iBAOF,YACE,gBCPF,SACE","file":"src.bc8cf30e.css","sourceRoot":"../src","sourcesContent":[".Button {\n  padding-top: 10px;\n}\n\n.Control {\n  margin-top: 20px;\n}\n\nh5 {\n  margin-top: 20px;\n}","$color: steelblue;\n\n.my-flix {\n  color: $color;\n}"]}
