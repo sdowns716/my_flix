@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 
 export class ProfileView extends React.Component {
   constructor(props) {
-    //super(props);
+    super(props);
 
     this.state = {
       username: null,
