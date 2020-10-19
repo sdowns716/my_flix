@@ -38399,7 +38399,15 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "link"
-      }, "Back")))));
+      }, "Back")), _react.default.createElement(_reactRouterDom.Link, {
+        to: '/movies/genres/:Name'
+      }, _react.default.createElement(_Button.default, {
+        variant: "link"
+      }, "Genre")), _react.default.createElement(_reactRouterDom.Link, {
+        to: '/movies/directors/:Name'
+      }, _react.default.createElement(_Button.default, {
+        variant: "link"
+      }, "Director")))));
     }
   }]);
 
@@ -39136,7 +39144,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/movies/director/:name",
+        path: "/movies/directors/:name",
         render: function render(_ref2) {
           var match = _ref2.match;
           if (!movies) return _react.default.createElement("div", {
