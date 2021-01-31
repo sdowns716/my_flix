@@ -38,6 +38,12 @@ export class MainView extends React.Component {
     }
   }
 
+  /**
+   * gets the movies from the database
+   * @function getMovies
+   * @param {*} token 
+   * @return {movies}
+   */
   getMovies(token) {
     axios.get('https://sydney-flix-app.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}`}
@@ -50,6 +56,11 @@ export class MainView extends React.Component {
     });
   }
 
+  /**
+   * once logged in, saves credentials to localstorage
+   * @function onLoggedIn
+   * @param {*} authData 
+   */
 	onLoggedIn(authData) {
 		this.setState({
 			user: authData.user.Username
@@ -74,7 +85,7 @@ export class MainView extends React.Component {
            <Route path="/register" render={() => <RegistrationView />} />
            <Route path="/movies/:movieId" render={({match}) => <MovieView movie={movies.find(m => m._id === match.params.movieId)}/>}/>
            <Route
-            path="/movies/directors/:name"
+            path="/movies/director/:name"
             render={({ match }) => {
               if (!movies) return <div className="main-view" />;
               return (
@@ -85,8 +96,8 @@ export class MainView extends React.Component {
                   }
                 />
               );
-            }}
-          />
+                }}
+                />
           <Route
             path="/movies/genres/:name"
             render={({ match }) => {
@@ -101,10 +112,10 @@ export class MainView extends React.Component {
             }}
           />
          </div>
-      </Router>
-    );
-  }
-}
+    </Router>
+              );
+          }
+        }
 
 let mapStateToProps = state => {
   return { movies: state.movies }

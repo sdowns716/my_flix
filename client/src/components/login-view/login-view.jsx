@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import axios from 'axios';
 import './login-view.scss';
 import { Link } from 'react-router-dom';
@@ -10,6 +9,12 @@ export function LoginView(props) {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 
+  /**
+   * submits username and password to login
+   * @function handleSubmit
+   * @param {string} username
+   * @param {string} password
+   */
 	const handleSubmit = (e) => {
 		e.preventDefault();
     axios
@@ -27,8 +32,7 @@ export function LoginView(props) {
   };
 
 	return (
-    <Container classname="login-container">
-		<Form>
+		<form>
 			<label>
 				Username:
 				<input
@@ -45,10 +49,9 @@ export function LoginView(props) {
 					onChange={(e) => setPassword(e.target.value)}
 				/>
 			</label>
-			<Button type="button" onClick={handleSubmit}>
+			<button type="button" onClick={handleSubmit}>
 				Submit
-			</Button>
-		</Form>
-  </Container>  
+			</button>
+		</form>
 	);
 }
